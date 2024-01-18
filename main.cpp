@@ -419,284 +419,6 @@ int Bird::howManyFlaps()
   /*
    copied UDT 3:
    */
-struct CPU
-{
-    CPU();
-    ~CPU();
-    std::string manufacturer;
-    float temperature;
-    float clockSpeed;
-    int cores;
-    std::string socket = "AM4";
-
-    float storeData(); 
-    float outputResults(); 
-    float compute(float x, float y);
-    void printClockSpeedAndSocket();
-    void overheat();
-};
-
-CPU::CPU() :
-clockSpeed{3.5f},
-cores(6)
-{
-    manufacturer = "AMD";
-    temperature = 55.5f;
-    std::cout << "CPU has been constructed!" << std::endl;
-}
-
-CPU::~CPU()
-{
-    std::cout << "This is CPU's destructor!" << std::endl;
-}
-
-float CPU::storeData()
-{
-    return 1.43667f * 2.44435f * temperature;
-}
-
-float CPU::outputResults()
-{
-    return 89.667f * .30741f * temperature;
-}
-
-float CPU::compute(float x, float y)
-{
-    return x * y * temperature;
-}
-
-void CPU::printClockSpeedAndSocket()
-{
-    std::cout << "CPU::printClockSpeedAndSocket() clock speed:" << clockSpeed << " socket: " << socket << std::endl; 
-}
-
-void CPU::overheat()
-{
-    if(temperature > 1000)
-    {
-        std::cout << "Overheated! Shutting down..." << std::endl;
-        temperature = 55;
-    }   
-}
-
-struct Motherboard
-{
-    Motherboard();
-    ~Motherboard();
-    std::string manufacturer;
-    bool wirelessLAN;
-    int m2Slots;
-    int expansionSlots;
-    int maxRAM = 64;
-    int AVSignals;
-
-    void dataToRAM();
-    void generateAVSignals();
-    void autoSuspend();
-    void printMaxRAMAndManufacturer();
-    void badSectors();
-};
-
-Motherboard::Motherboard() :
-manufacturer("Gigabyte"),
-m2Slots(2)
-{
-    wirelessLAN = false;
-    expansionSlots = 4;
-    AVSignals = 0;
-    std::cout << "Motherboard has been constructed!" << std::endl;
-}
-
-Motherboard::~Motherboard()
-{
-    std::cout << "This is Motherboard's destructor!" << std::endl;
-}
-
-void Motherboard::dataToRAM()
-{
-    maxRAM += 5;
-}
-
-void Motherboard::generateAVSignals()
-{
-    ++AVSignals;
-}
-
-void Motherboard::autoSuspend()
-{
-    maxRAM = 0;
-    AVSignals = 0;
-}
-
-void Motherboard::printMaxRAMAndManufacturer()
-{
-    std::cout << "Motherboard::printMaxRAMAndManufacturer() max RAM:" << maxRAM << " manufacturer: " << manufacturer << std::endl; 
-}
-
-void Motherboard::badSectors()
-{
-    while(maxRAM > 0)
-    {
-        std::cout << "RAM corrupted!" << std::endl; 
-        --maxRAM;
-    }
-}
-
-
-struct KeyboardAndMouse
-{
-    KeyboardAndMouse();
-    ~KeyboardAndMouse();
-    int numberOfMouseButtons;
-    bool mechanicalStyle;
-    bool wireless;
-    std::string language;
-    bool numpad = false;
-
-    int transmitKeystrokeData();
-    double transmitXYChange(double x, double y);
-    bool toggleStatus(bool status);
-    void printNumpadAndLanguage();
-    void typing(int words);
-};
-
-KeyboardAndMouse::KeyboardAndMouse() :
-wireless(true),
-language("English")
-{
-    numberOfMouseButtons = 3;
-    mechanicalStyle = false;
-    std::cout << "KeyboardAndMouse has been constructed!" << std::endl;
-}
-
-KeyboardAndMouse::~KeyboardAndMouse()
-{
-    std::cout << "This is KeyboardAndMouse's destructor!" << std::endl;
-}
-
-int KeyboardAndMouse::transmitKeystrokeData()
-{
-    return 103;
-}
-
-double KeyboardAndMouse::transmitXYChange(double x, double y)
-{
-    return sqrt(pow(x, 2.) + pow(y, 2.));
-}
-
-bool KeyboardAndMouse::toggleStatus(bool status)
-{
-    if(status == true)
-    {
-        return false;
-    }
-    return true;
-}
-
-void KeyboardAndMouse::printNumpadAndLanguage()
-{
-    std::cout << " KeyboardAndMouse::printNumpadAndLanguage() numpad:" << numpad << " language: " << language << std::endl; 
-}
-
-void KeyboardAndMouse::typing(int words)
-{
-    int check = 1;
-    for(int i = words * 6; i > 0; --i)
-    {
-        if(check == 1)
-        {
-            std::cout << "Click!" << std::endl;
-            check = 0;      
-        }
-        else
-        {
-            std::cout << "Clack!" << std::endl;
-            check = 1;
-        }
-    }
-}
-
-struct CoolingSystem
-{
-
-    CoolingSystem();
-    ~CoolingSystem();
-    bool liquid;
-    int numberOfRGB;
-    int numberOfFans = 3;
-    int fanSetting;
-    bool molex;
-    std::string lightColor;
-
-    void setFanSpeed(int speed);   
-    void setLightColor(std::string color);
-    void springALeak();
-    void printFansRGB();
-    void powerStatus(int hours);
-
-};
-
-CoolingSystem::CoolingSystem() :
-liquid(false),
-numberOfRGB(5)
-{
-    fanSetting = 2;
-    molex = false;
-    lightColor = "red";
-    std::cout << "CoolingSystem has been constructed!" << std::endl;
-}
-
-CoolingSystem::~CoolingSystem()
-{
-    std::cout << "This is CoolingSystem's destructor!" << std::endl;
-}
-
-void CoolingSystem::setFanSpeed(int speed)
-{
-    if(0 <= speed && speed >= 5)
-    {
-        fanSetting = speed;
-    }
-    else
-    {
-        std::cout << "Invalid Selection" << std::endl;//the if and else are both executed ???
-    }
-    std::cout << "Speed is " << fanSetting << std::endl;
-}
-
-void CoolingSystem::setLightColor(std::string color)
-{
-    if(color == "red" || color == "orange" || color == "blue" || color == "green")
-    {
-        lightColor = color;
-    }
-    else
-    {
-        std::cout << "Please Pick a Color" << std::endl;
-    }
-
-}
-
-void CoolingSystem::springALeak()
-{
-    liquid = true;
-}
-
-void CoolingSystem::printFansRGB()
-{
-    std::cout << "CoolingSystem::printFansRGB() number of fans:" << numberOfFans << " number of RGB: " << numberOfRGB << std::endl; 
-}
-
-void CoolingSystem::powerStatus(int hours)
-{
-    int jigawatts = 8;
-    for(int i = hours* 60; i > 0; --i)
-    {
-        std::cout << "Cooling has consumed " << jigawatts << " jigawatts!" << std::endl; 
-        jigawatts += 8;
-    }
-}
-
 struct GPU
 {
     GPU();
@@ -710,12 +432,16 @@ struct GPU
     int currentRGB;
     int fanSpeed = 3;
     int model = 1;
+    float temperature = 30.f;
+    float totalBitcoinMined = 0;
 
     void outputAVSignal();
     void cycleRGBDisplay(); 
     void adjustFanSpeed(int speed);
     void printFanSpeedRGBCycle();
     void upgrade();
+    float mineBitcoin(float x, float y);
+    void overheat();
 };
 
 GPU::GPU() :
@@ -798,63 +524,20 @@ void GPU::upgrade()
     model = 1;
 }
 
-
-struct Computer
+float GPU::mineBitcoin(float x, float y)
 {
-    Computer();
-    ~Computer();
-    CPU myCPU;
-    Motherboard myMotherboard;
-    KeyboardAndMouse myKeyboardAndMouse;
-    CoolingSystem myCoolingSystem;
-    GPU myGPU;
-
-    void runProgram(float complexity);
-    void allocateRAM();
-    void refreshDisplay();
-    void printStats();
-    void typingAndPowerStatus(int a, int b);
-};
-
-Computer::Computer()
-{
-    std::cout << "Computer has been constructed!" << std::endl;
+    totalBitcoinMined += x * y * temperature;
+    temperature *= 1.8f;
+    return x * y * temperature;
 }
 
-Computer::~Computer()
+void GPU::overheat()
 {
-    std::cout << "This is Computer's destructor!" << std::endl;
-}
-
-void Computer::runProgram(float complexity)
-{
-    std::cout << "You are running my program..." << std::endl;
-    myCPU.temperature += complexity;
-}
-
-void Computer::allocateRAM()
-{
-    myMotherboard.dataToRAM();
-    std::cout << "You can always download more..." << std::endl;
-    std::cout << "Total RAM is " << myMotherboard.maxRAM << std::endl;
-}
-
-void Computer::refreshDisplay()
-{
-    myMotherboard.generateAVSignals();
-    myGPU.outputAVSignal();
-}
-
-void Computer::printStats()
-{
-    myMotherboard.printMaxRAMAndManufacturer();
-    myGPU.printFanSpeedRGBCycle();
-}
-
-void Computer::typingAndPowerStatus(int a, int b)
-{
-    myKeyboardAndMouse.typing(a);
-    myCoolingSystem.powerStatus(b);
+    if(temperature > 1500)
+    {
+        std::cout << "Overheated! Shutting down..." << std::endl;
+        temperature = 55;
+    }   
 }
   /*
    new UDT 4:
@@ -914,56 +597,64 @@ void Flock::feast()
    new UDT 5:
    with 2 member functions
    */
-struct ServerFarm
+struct BitcoinMiningOp
 {
-    ServerFarm();
-    ~ServerFarm();
-    
-    Computer lenovo;
-    Computer asus;
-    Computer IBM;
-    Computer apple;
-    Computer acer;
+    BitcoinMiningOp();
+    ~BitcoinMiningOp();
 
-    void cloudHosting(float complexity);
-    void howMuchRAM(int much);
+    GPU subGPU1;
+    GPU subGPU2;
+    GPU subGPU3;
+    GPU subGPU4;
+    GPU subGPU5;
+
+    void mineBitcoin(float complexity);
+    void mtGox();
 };
 
-ServerFarm::ServerFarm()
+BitcoinMiningOp::BitcoinMiningOp()
 {
-    ServerFarm::cloudHosting(30);    
+    mineBitcoin(5.5f);
 }
 
-ServerFarm::~ServerFarm()
+BitcoinMiningOp::~BitcoinMiningOp()
 {
-    ServerFarm::howMuchRAM(10);
+    mineBitcoin(30.f);
+    mineBitcoin(40.f);
+    mineBitcoin(50.f);
+    mtGox();
 }
 
-void ServerFarm::cloudHosting(float complexity)
+void BitcoinMiningOp::mineBitcoin(float amount)
 {
-    lenovo.runProgram(complexity);
-    asus.runProgram(complexity);
-    IBM.runProgram(complexity);
-    apple.runProgram(complexity);
-    acer.runProgram(complexity);
+    float subtotal = 0.f;
+    subtotal += subGPU1.mineBitcoin(amount, amount / 3.f);
+    amount *= 6.f;
+    subtotal += subGPU2.mineBitcoin(amount / 3.66f, amount * 8.44444f);
+    amount /= 2.99f;
+    subtotal += subGPU3.mineBitcoin(amount + 70.f, amount * 90.f);
+    amount += 33.33333333f;
+    subtotal += subGPU4.mineBitcoin(amount * 10.f, amount * 1.11f);
+    amount *= .02790f;
+    subtotal += subGPU5.mineBitcoin(amount, amount / 2.f);
 
-    lenovo.myCPU.overheat();
-    asus.myCPU.overheat();
-    IBM.myCPU.overheat();
-    apple.myCPU.overheat();
-    acer.myCPU.overheat();
+    subGPU1.overheat();
+    subGPU2.overheat();
+    subGPU3.overheat();
+    subGPU4.overheat();
+    subGPU5.overheat();
+    std::cout << "You Mined " << subtotal << " Bitcoin this session!" << std::endl;
 }
 
-void ServerFarm::howMuchRAM(int much)
+void BitcoinMiningOp::mtGox()
 {
-    for(int i = much; i > 0; --i)
-    {
-        lenovo.allocateRAM();
-        asus.allocateRAM();
-        IBM.allocateRAM();
-        apple.allocateRAM();
-        acer.allocateRAM();
-    }
+    float total = subGPU1.totalBitcoinMined + subGPU2.totalBitcoinMined + subGPU3.totalBitcoinMined + subGPU4.totalBitcoinMined + subGPU5.totalBitcoinMined;
+    std::cout << "You mined " << total << " but it got stolen by the exchange!!" << std::endl;
+    subGPU1.totalBitcoinMined = 0;
+    subGPU2.totalBitcoinMined = 0;
+    subGPU3.totalBitcoinMined = 0;
+    subGPU4.totalBitcoinMined = 0;
+    subGPU5.totalBitcoinMined = 0;
 }
   /*
    MAKE SURE YOU ARE NOT ON THE MASTER BRANCH
@@ -989,14 +680,9 @@ void ServerFarm::howMuchRAM(int much)
     Guitar::GuitarString tele1;
     Bird bird;
     Bird::Progeny progeny;
-    CPU ryzen;
-    Motherboard motherboard;
-    KeyboardAndMouse logitech;
-    CoolingSystem noctua;
     GPU nvidia;
-    Computer dell;
     Flock seagulls;
-    ServerFarm noVa;
+    BitcoinMiningOp botNet;
 
     tele.emitNote(tele1, 7);
     tele.detachFromStrap();
@@ -1011,55 +697,26 @@ void ServerFarm::howMuchRAM(int much)
     progeny.flyTheNest();
     progeny.eat(.67f, "worm");
     progeny.chirp(true, .788f, 12);
-    ryzen.storeData();
-    ryzen.compute(46.7866f, 30027.11111f);
-    ryzen.outputResults();
-    motherboard.autoSuspend();
-    motherboard.dataToRAM();
-    motherboard.generateAVSignals();
-    logitech.toggleStatus(false);
-    logitech.transmitKeystrokeData();
-    logitech.transmitXYChange(753.22, 966.80);
-    noctua.setFanSpeed(2);
-    noctua.setLightColor("orange");
-    noctua.springALeak();
     nvidia.adjustFanSpeed(3);
     nvidia.cycleRGBDisplay();
     nvidia.outputAVSignal();
-    dell.allocateRAM();
-    dell.refreshDisplay();
-    dell.runProgram(600.);
-    
 
     std::cout << "Progeny's percent to maturity is " << progeny.percentToMaturity << "." << std::endl;
-    std::cout << "The Result of Ryzen's computation is " << ryzen.outputResults() << "." << std::endl;
-    std::cout << "Noctua's RGB color is " << noctua.lightColor << "." << std::endl;
 
     tele.printPickupsStrings();
     tele1.printMaterialCoated();
     bird.printMaleWingspan();
     progeny.printSatedEgg();
-    ryzen.printClockSpeedAndSocket();
-    motherboard.printMaxRAMAndManufacturer();
-    logitech.printNumpadAndLanguage();
-    noctua.printFansRGB();
     nvidia.printFanSpeedRGBCycle();
-    dell.printStats();
 
     tele.polish();
     tele1.microwave(4);
     bird.howManyFlaps();
     progeny.hatch();
-    ryzen.overheat();
-    motherboard.badSectors();
-    logitech.typing(7);
-    noctua.powerStatus(2);
     nvidia.upgrade();
-    dell.typingAndPowerStatus(2, 3);
 
     seagulls.feast();
     seagulls.fly(587.44, 30000.7);
-    noVa.cloudHosting(6000.4f);
-    noVa.howMuchRAM(3);
+    botNet.mtGox();
     std::cout << "good to go!" << std::endl;
   }
