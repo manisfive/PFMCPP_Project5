@@ -120,6 +120,7 @@ struct Guitar
     void detachFromStrap();
     void printPickupsStrings();
     void polish();
+    void printModelGauge();
 };
 
 Guitar::GuitarString::GuitarString() :
@@ -239,6 +240,11 @@ void Guitar::polish()
     std::cout << "Your guitar is good as new!" << std::endl;
 }
 
+void Guitar::printModelGauge()
+{
+        std::cout << "Your guitar is a " << this->makeModel << " with " << this->stringPlaying.gauge << " guage strings on it." << std::endl;
+}
+
 /*
  copied UDT 2:
  */
@@ -268,6 +274,7 @@ struct Bird
         int chirp(bool parentPresent, float location, int timeOfDay);
         void printSatedEgg();
         void hatch();
+        void printPercentToMaturity();
     };
 
     Progeny fledgling;
@@ -351,6 +358,11 @@ void Bird::Progeny::hatch()
         std::cout << "Fledgling has hatched!" << std::endl;
         stillEgg = false;
     }
+}
+
+void Bird::Progeny::printPercentToMaturity()
+{
+    std::cout << "Progeny's percent to maturity is " << this->percentToMaturity << "." << std::endl;
 }
 
 Bird::Bird() :
@@ -555,6 +567,7 @@ struct Flock
 
     void fly(double x, double y);
     void feast();
+    void printMemberTwoAndThreeDistance();
 };
 
 Flock::Flock()
@@ -592,6 +605,11 @@ void Flock::feast()
     flockMember1.forage(flockMember1.fledgling);
     flockMember2.forage(flockMember2.fledgling);
     flockMember2.forage(flockMember2.fledgling);
+}
+
+void Flock::printMemberTwoAndThreeDistance()
+{
+    std::cout << "Flock members 2 and 3 have flown " << this->flockMember2.distance + this->flockMember3.distance << "." << std::endl;
 }
   /*
    new UDT 5:
@@ -702,7 +720,12 @@ void BitcoinMiningOp::mtGox()
     nvidia.outputAVSignal();
 
     std::cout << "Progeny's percent to maturity is " << progeny.percentToMaturity << "." << std::endl;
-
+    progeny.printPercentToMaturity();
+    std::cout << "Your guitar is a " << tele.makeModel << " with " << tele1.gauge << " guage strings on it." << std::endl;
+    tele.printModelGauge();
+    std::cout << "Flock members 2 and 3 have flown " << seagulls.flockMember2.distance + seagulls.flockMember3.distance << "." << std::endl;
+    seagulls.printMemberTwoAndThreeDistance();
+    
     tele.printPickupsStrings();
     tele1.printMaterialCoated();
     bird.printMaleWingspan();
