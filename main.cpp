@@ -588,7 +588,7 @@ void Flock::fly(double x, double y)
     int totalFlaps;
     flockLeader.fly(x, y);
     flockMember1.fly(x, y);
-    flockMember2.fly(x, x);
+    flockMember2.fly(x, y);
     flockMember3.fly(x, y);
 
     totalFlaps = flockLeader.howManyFlaps() + flockMember1.howManyFlaps() + flockMember2.howManyFlaps() + flockMember3.howManyFlaps();
